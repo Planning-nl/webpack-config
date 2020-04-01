@@ -5,12 +5,12 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const path = require("path");
 
 require("dotenv").config();
-const resolve = (file) => path.resolve("./", file);
 
-const base = (libraryName) => ({
+const baseConfig = {
     mode: process.env.NODE_ENV === "production" ? "production" : "development",
     resolve: {
         extensions: ["*", ".js", ".json", ".ts"],
+        symlinks: false,
     },
     plugins: [
         new FriendlyErrorsWebpackPlugin({
@@ -20,16 +20,10 @@ const base = (libraryName) => ({
     performance: {
         hints: false,
     },
-    stats: { children: false },
-    entry: {
-        app: "./src/index.ts",
-    },
     output: {
-        path: resolve("dist"),
-        publicPath: "/dist/",
-        library: libraryName,
+        path: path.resolve("dist"),
+        library: "[name]",
         libraryTarget: "umd",
-        libraryExport: "default",
     },
     module: {
         rules: [
@@ -49,44 +43,40 @@ const base = (libraryName) => ({
             }),
         ],
     },
-});
+};
 
-const builds = (libraryName) => ({
-    development: {
-        config: {
-            devtool: "source-map",
-            mode: "development",
-            output: {
-                filename: `${libraryName}.js`,
-                libraryTarget: "umd",
-            },
+const developmentConfig = {
+    config: {
+        devtool: "source-map",
+        mode: "development",
+        output: {
+            filename: "[name].js",
         },
     },
-    production: {
-        config: {
-            mode: "production",
-            output: {
-                filename: `${libraryName}.min.js`,
-                libraryTarget: "umd",
-            },
-            performance: {
-                hints: false,
-            },
+};
+
+const productionConfig = {
+    config: {
+        mode: "production",
+        output: {
+            filename: "[name].min.js",
         },
-        env: "production",
+        performance: {
+            hints: false,
+        },
     },
-});
+    env: "production",
+};
 
-function genConfig(opts, libraryName) {
-    const config = merge({}, base(libraryName), opts.config);
+module.exports = (extraConfig) =>
+    [productionConfig, developmentConfig].map((environmentConfig) => {
+        const config = merge({}, baseConfig, environmentConfig.config, extraConfig);
 
-    config.plugins = config.plugins.concat([
-        new webpack.DefinePlugin({
-            "process.env.NODE_ENV": JSON.stringify(opts.env || "development"),
-        }),
-    ]);
+        config.plugins = config.plugins.concat([
+            new webpack.DefinePlugin({
+                "process.env.NODE_ENV": JSON.stringify(environmentConfig.env || "development"),
+            }),
+        ]);
 
-    return config;
-}
-
-module.exports = (libraryName) => Object.values(builds(libraryName)).map((build) => genConfig(build, libraryName));
+        return config;
+    });
