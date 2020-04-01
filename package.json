@@ -1,0 +1,35 @@
+{
+    "name": "@planning.nl/webpack-config",
+    "description": "Webpack config used by our public projects",
+    "version": "1.0.0",
+    "author": "Planning.nl, Robbin Baauw",
+    "bugs": {
+        "url": "https://github.com/Planning-nl/webpack-config/issues",
+        "email": "support@planning.nl"
+    },
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "happypack": "^5.0.1",
+        "terser-webpack-plugin": "^2.3.5",
+        "webpack": "^4.42.1",
+        "webpack-cli": "^3.3.11",
+        "webpack-merge": "^4.2.2"
+    },
+    "devDependencies": {
+        "@planning.nl/eslint-config": "^1.0.3",
+        "eslint": "^6.8.0"
+    },
+    "peerDependencies": {
+        "ts-loader": "^6.2.2"
+    },
+    "homepage": "https://github.com/Planning-nl/webpack-config#readme",
+    "keywords": [],
+    "license": "apache",
+    "repository": "github:Planning-nl/webpack-config",
+    "scripts": {
+        "build": "",
+        "prepare": "npm run build",
+        "version": "npm run lint"
+    }
+}
