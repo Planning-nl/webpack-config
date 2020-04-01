@@ -1,7 +1,7 @@
 {
     "name": "@planning.nl/webpack-config",
     "description": "Webpack config used by our public projects",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Planning.nl, Robbin Baauw",
     "bugs": {
         "url": "https://github.com/Planning-nl/webpack-config/issues",
@@ -26,10 +26,5 @@
     "homepage": "https://github.com/Planning-nl/webpack-config#readme",
     "keywords": [],
     "license": "apache",
-    "repository": "github:Planning-nl/webpack-config",
-    "scripts": {
-        "build": "",
-        "prepare": "npm run build",
-        "version": "npm run lint"
-    }
+    "repository": "github:Planning-nl/webpack-config"
 }

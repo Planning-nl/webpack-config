@@ -5,7 +5,7 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const path = require("path");
 
 require("dotenv").config();
-const resolve = (file) => path.resolve(__dirname, file);
+const resolve = (file) => path.resolve("./", file);
 
 const base = (libraryName) => ({
     mode: process.env.NODE_ENV === "production" ? "production" : "development",
@@ -25,7 +25,7 @@ const base = (libraryName) => ({
         app: "./src/index.ts",
     },
     output: {
-        path: resolve("../dist"),
+        path: resolve("dist"),
         publicPath: "/dist/",
         library: libraryName,
         libraryTarget: "umd",
