@@ -11,6 +11,7 @@ const baseConfig = {
     resolve: {
         extensions: ["*", ".js", ".json", ".ts"],
         symlinks: false,
+        modules: [path.resolve("./", "node_modules")],
     },
     plugins: [
         new FriendlyErrorsWebpackPlugin({
