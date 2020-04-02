@@ -25,6 +25,8 @@ const baseConfig = {
         path: path.resolve("dist"),
         library: "[name]",
         libraryTarget: "umd",
+        // See https://github.com/webpack/webpack/issues/6522
+        globalObject: "typeof self !== 'undefined' ? self : this",
     },
     module: {
         rules: [

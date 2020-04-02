@@ -1,7 +1,7 @@
 {
     "name": "@planning.nl/webpack-config",
     "description": "Webpack config used by our public projects",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "author": "Planning.nl, Robbin Baauw",
     "bugs": {
         "url": "https://github.com/Planning-nl/webpack-config/issues",
